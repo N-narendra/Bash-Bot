@@ -4,12 +4,32 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix="$")
 
+filtered_words = ["fuck","shit","bitch"]
+
 @client.event
 async def on_ready() :
-    await client.change_presence(status = discord.Status.online, activity = discord.Game("BASH 1.0"))
+    await client.change_presence(status = discord.Status.online, activity = discord.Game("$help"))
     print("I am online")
 
-     
+@client.event
+async def on_command_error(ctx,error):
+    if isinstance(error,commands.MissingPermissions):
+        await ctx.send("you Can't Do That :( ")
+        await ctx.message.delete()
+    elif isinstance(error,commands.MissingRequiredArgument):
+        await ctx.send("Please Enter All Arguments..!")
+        await ctx.message.delete()   
+    else: 
+        raise error   
+    
+@client.event
+async def on_message(msg):
+    for word in filtered_words:
+        if word in msg.content:
+            await msg.delete()
+        await client.process_commands(msg)
+        break
+
 @client.command(help="(show author_name)")
 async def whoami(ctx) :
     await ctx.send(f"```You are {ctx.message.author.name}..!```")
@@ -20,9 +40,9 @@ async def ping(ctx) :
 
 @client.command(help="Help To Clear Chats")
 @commands.has_permissions(manage_messages = True )
-async def clear(ctx, amount=3) :
+async def clear(ctx, amount=1) :
     await ctx.channel.purge(limit=amount)
-    await ctx.channel.send("Message Cleared")
+    await ctx.channel.send(f"Message Cleared By {ctx.message.author.name}..!")
 
 @client.command(help="Print args....!")
 async def print(ctx, *args):
@@ -32,13 +52,17 @@ async def print(ctx, *args):
 		response = response + " " + arg
 
 	await ctx.channel.send(response)
-
+ 
 @client.command(help="rm Is commands Which To Remove Member from Server..!")
 @commands.has_permissions(kick_members = True )
 async def rm(ctx,member : discord.Member,*,reason):
-     await ctx.channel.send(member.name +"`` Have been Removed,Because: ``"+ reason)
-     await member.send("`` you Have Removed,Because:``" +reason)
-     await member.kick(reason=reason)
+    try:
+        await member.send("`` you Have Removed,Because:``" +reason)
+        await member.kick(reason=reason)
+    except:
+        await ctx.send("The Members Has thier dms Closed.!\n")
+        await ctx.channel.send(member.name +"`` Have been Removed,Because: ``"+ reason)
+        await member.kick(reason=reason)
 
 
 @client.command(help="Ban Helps To Ban Members From Server..!")
