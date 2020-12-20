@@ -1,24 +1,15 @@
 import discord
 from discord.ext import commands
-import os
+
 
 client = commands.Bot(command_prefix="$")
-token = os.getenv("DISCORD_BOT_TOKEN")
-
-bc = ["fuck","shit"]
 
 @client.event
 async def on_ready() :
     await client.change_presence(status = discord.Status.online, activity = discord.Game("BASH 1.0"))
     print("I am online")
 
-@client.event
-async def on_message(msg):
-    for word in bc:
-        if word in msg.content:
-            await msg.delete()
-        await client.process_commands(msg)
-            
+     
 @client.command(help="(show author_name)")
 async def whoami(ctx) :
     await ctx.send(f"```You are {ctx.message.author.name}..!```")
