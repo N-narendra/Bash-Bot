@@ -9,6 +9,8 @@ class Ban(commands.Cog):
     @commands.command(help="Ban Helps To Ban Members From Server..!")
     @commands.has_permissions(ban_members = True )
     async def ban(self, ctx,member : discord.Member,*,reason):
+       
+
         await ctx.channel.send(member.name +"`` Have been Banned,Because:`` "+reason)
         await member.send("``you Have Banned,Because:`` "+reason)
         await member.ban(reason=reason)

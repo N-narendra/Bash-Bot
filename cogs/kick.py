@@ -10,6 +10,10 @@ class Rm(commands.Cog):
     @commands.command(help="rm Is commands Which To Remove Member from Server..!")
     @commands.has_permissions(kick_members = True )
     async def rm(self, ctx,member : discord.Member,*,reason):
+       if member == ctx.message.author:
+        await ctx.send(
+            f'**{ctx.message.author.name},** you can\'t Remove yourself, ¯\_(ツ)_/¯.')
+        return
         try:
             await member.send("``you Have Removed,Because:`` " +reason)
             await member.kick(reason=reason)
