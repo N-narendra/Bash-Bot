@@ -7,40 +7,6 @@ import json
 from discord.ext import commands
 
 
-def get_prefix(client,message):
-
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-    return prefixes[str(message.guild.id)]    
-
-client = commands.Bot(command_prefix= get_prefix)
-
-@client.event
-async def on_guild_join(guild):
-
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-    prefixes[str(guild.id)] = "$"
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes,f)
-
-@client.command()
-@commands.has_permissions(administrator = True)
-async def prefix(ctx, prefix):
-
-    with open("prefixes.json", "r") as f:
-       prefixes = json.load(f)
-
-    prefixes[str(ctx.guild.id)] = prefix 
-    
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes,f)  
-
-    await ctx.send(f"The Prefix was changed to {prefix}")  
-
 client.remove_command("help")
 
 @client.event
@@ -106,22 +72,6 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')   
 
-@client.event
-async def on_message(msg):
-
-        try:
-            if msg.mentions[0] == client.user:
-
-                with open("prefixes.json", "r") as f:
-                    prefixes = json.load(f)
-
-                pre = prefixes[str(msg.guild.id)] 
-
-                await msg.channel.send(f"My Prefix for this server is {pre}")
-        except:
-            pass
-
-        await client.process_commands(msg)  
 
 #client.run("NzkwNDgwODk1MTI3MTkxNTUz.X-BOsw.50pGDsZ4m48yY7Whl2vhAd4wyLM")  
 client.run("Nzg5NTA0OTg0NzUyMDYyNDg2.X9zB0A.nORPkFLfgmVz22C47lcU5Fl8LDc") 
