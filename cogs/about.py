@@ -9,10 +9,15 @@ class About(commands.Cog):
 
     @commands.command(help="About Bot..!")
     async def about(self, ctx) :
-         await ctx.send("__**About me**__\n"
-                       "BashBot is a Discord bot that allows Commands access via chat It will like Binaries.\n"
-                       "**Discord**: https://discord.gg/XAGcbun\n"
-                       "**Author**: Narendra.")
+        em = discord.Embed(title = "BashBot", description="**About me**\n\n"
+                       "**BashBot is a Discord bot that allows Commands access via chat It will like Binaries.**\n\n"
+                       "**Discord**: https://discord.gg/XAGcbun\n\n"
+                       "**BASHBOT** Invite: https://discord.com/api/oauth2/authorize?client_id=789504984752062486&permissions=8&scope=bot\n\n"
+                       "**Author**: **Narendra**",colour=discord.Colour.red())
+        em.set_footer(icon_url= ctx.author.avatar_url, text=f"Command Executed By {ctx.message.author.name}")
+     
+        await ctx.send(embed = em)
+           
 
 
 def setup(client):

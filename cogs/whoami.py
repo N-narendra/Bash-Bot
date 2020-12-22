@@ -15,7 +15,7 @@ class Whoami(commands.Cog):
     @commands.command(help="show Client Name")
     async def whoami(self, ctx) :
         await ctx.send(f"```You are {ctx.message.author.name}..!```")
-
+        
 
 def setup(client):
     client.add_cog(Whoami(client))
