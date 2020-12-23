@@ -9,17 +9,23 @@ class Rm(commands.Cog):
 
     @commands.command(help="rm Is commands Which To Remove Member from Server..!")
     @commands.has_permissions(kick_members = True )
-    async def rm(self, ctx,member : discord.Member,*,reason):
-       if member == ctx.message.author:
-        await ctx.send(
-            f'**{ctx.message.author.name},** you can\'t Remove yourself, ¯\_(ツ)_/¯.')
-        return
+    async def rm(self, ctx,member : discord.Member,*,reason=None):
+        guild = ctx.guild
+        if (member) == (ctx.message.author):
+            await ctx.send(f'**{ctx.message.author.name},** you can\'t Remove yourself, ¯\_(ツ)_/¯.')
+            return
         try:
-            await member.send("``you Have Removed,Because:`` " +reason)
+            await member.send(f" you have been Banned from: **{guild.name}** reason: **{reason}**")
+            await member.kick(reason=reason)
+            embed = discord.Embed(title="Removed", description=f"{member.mention} was Removed ", colour=discord.Colour.green())
+            embed.add_field(name="reason:", value=reason, inline=False)
+            await ctx.send(embed=embed)
             await member.kick(reason=reason)
         except:
-            await ctx.send("The Members Has thier dms Closed.!\n")
-            await ctx.channel.send(member.name +"`` Have been Removed,Because: ``"+ reason)
+            await ctx.send("**The Members Has thier dms Closed.!**\n")
+            embed = discord.Embed(title="Removed", description=f"{member.mention} was Removed ", colour=discord.Colour.green())
+            embed.add_field(name="reason:", value=reason, inline=False)
+            await ctx.send(embed=embed)
             await member.kick(reason=reason)
 def setup(client):
     client.add_cog(Rm(client))

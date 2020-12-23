@@ -6,22 +6,19 @@ class Unban(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(help="help To Unban Members..!")
-    @commands.has_permissions(ban_members=True) 
-    async def unban(self, ctx,*,member):
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
-        member_name, member_disc = member.split('#')
+        member_name, member_discriminator = member.split("#")
 
-        for banned_entry in banned_users:
-            user = banned_entry.user 
+        for ban_entry in banned_users:
+            user = ban_entry.user
 
-            if (user.name, user.discriminator)==(member_name, member_disc):
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
-                await ctx.send(member_name +" has Been Unbanned...!")
+                await ctx.send(f'**Unbanned** {user.mention}')
                 return
-
-                await ctx.send(member+" was not found..!")
-
-   
+    
 def setup(client):
     client.add_cog(Unban(client))

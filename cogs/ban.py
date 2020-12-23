@@ -8,11 +8,14 @@ class Ban(commands.Cog):
 
     @commands.command(help="Ban Helps To Ban Members From Server..!")
     @commands.has_permissions(ban_members = True )
-    async def ban(self, ctx,member : discord.Member,*,reason):
+    async def ban(self, ctx,member : discord.Member,*,reason=None):
        
+        guild = ctx.guild
 
-        await ctx.channel.send(member.name +"`` Have been Banned,Because:`` "+reason)
-        await member.send("``you Have Banned,Because:`` "+reason)
+        embed = discord.Embed(title="Banned", description=f"{member.mention} was Banned ", colour=discord.Colour.green())
+        embed.add_field(name="reason:", value=reason, inline=False)
+        await ctx.send(embed=embed)
+        await member.send(f" you have been Banned from: {guild.name} reason: {reason}")
         await member.ban(reason=reason)
 
    

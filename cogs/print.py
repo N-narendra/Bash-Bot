@@ -12,7 +12,7 @@ class Print(commands.Cog):
 
 	    for arg in args:
 		    response = response + " " + arg
-
+            
 	    await ctx.channel.send(response)
 
 def setup(client):

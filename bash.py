@@ -7,6 +7,7 @@ import json
 from discord.ext import commands
 
 client = commands.Bot(command_prefix= "$")
+
 client.remove_command("help")
 
 @client.event
@@ -14,11 +15,14 @@ async def on_ready() :
     await client.change_presence(activity=discord.Game(name=f"on {len(client.guilds)} Servers | $help"))
 
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Youtube"))
+
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Bash 3.0"))
+
     
 async def ch_pr():
         await client.wait_until_ready()
 
-        statuses = ["CyberPunk 2088", f"on {len(client.guilds)} Servers | $help",]
+        statuses = ["CyberPunk 2088", f"on {len(client.guilds)} Servers | $help","Bash 3.0"]
 
         while not client.is_closed():
 
@@ -26,24 +30,10 @@ async def ch_pr():
 
             await client.change_presence(activity=discord.Game(name=status))
 
-            await asyncio.sleep(10)
+            await asyncio.sleep(5)
 
 
 client.loop.create_task(ch_pr())         
-
-
-
-filtered_words = ["fuck","shit","bitch","fucker"]
-
-@client.event
-async def on_message(msg):
-    for word in filtered_words:
-        if word in msg.content:
-            await msg.delete()
-
-
-    await client.process_commands(msg)
-
 
 @client.event
 async def on_command_error(ctx,error):
@@ -72,6 +62,17 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')   
 
+@client.event
+async def on_message(msg):
+
+        try:
+            if msg.mentions[0] == client.user: 
+
+                await msg.channel.send("My Prefix is **$**")
+        except:
+            pass
+
+        await client.process_commands(msg)  
 
 #client.run("NzkwNDgwODk1MTI3MTkxNTUz.X-BOsw.50pGDsZ4m48yY7Whl2vhAd4wyLM")  
 client.run("Nzg5NTA0OTg0NzUyMDYyNDg2.X9zB0A.nORPkFLfgmVz22C47lcU5Fl8LDc") 
