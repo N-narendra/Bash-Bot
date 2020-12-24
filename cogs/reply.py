@@ -64,8 +64,8 @@ class Reply(commands.Cog):
                     await message.channel.send(embed=embed)
                     return
                     rs ==(message.content.lower())
-            elif rs == ("good nigth"):
-                    response = ("Good Nigth Buddy..!")
+            elif rs == ("good night"):
+                    response = ("Good Night Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
                     embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
