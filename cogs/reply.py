@@ -13,7 +13,8 @@ class Reply(commands.Cog):
             msg = message
             guild = message.guild
             gold = discord.Color.dark_gold()
-            if message.content == ("goodnight"):
+            rs = (message.content.lower())
+            if rs == ("goodnight"):
                     response = ("Goodnight Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
@@ -22,7 +23,8 @@ class Reply(commands.Cog):
                     embed.set_footer(text=f"{guild.name}", icon_url=guild.icon_url)
                     await message.channel.send(embed=embed)
                     return
-            elif message.content == ("Goodmorning"):
+                    rs ==(message.content.lower())    
+            elif rs == ("goodmorning"):
                     response = ("GoodMorning Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
@@ -31,17 +33,19 @@ class Reply(commands.Cog):
                     embed.set_footer(text=f"{guild.name}", icon_url=guild.icon_url)
                     await message.channel.send(embed=embed)
                     return
-            elif message.content == ("gm"):
-                    response = ("goodmorning Buddy..!")
+                    rs ==(message.content.lower())
+            elif rs == ("gm"):
+                    response = ("GoodMorning Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
                     embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
                     embed.add_field(name="☕", value=c_r, inline=True)
                     embed.set_footer(text=f"{guild.name}", icon_url=guild.icon_url)
                     await message.channel.send(embed=embed)
-                    return 
-            elif message.content == ("gn"):
-                    response = ("goodnight Buddy..!")
+                    return
+                    rs ==(message.content.lower()) 
+            elif rs == ("gn"):
+                    response = ("GoodNight Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
                     embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
@@ -49,8 +53,9 @@ class Reply(commands.Cog):
                     embed.set_footer(text=f"{guild.name}", icon_url=guild.icon_url)
                     await message.channel.send(embed=embed)
                     return
-            elif message.content == ("Gm"):
-                    response = ("GoodMorning Buddy..!")
+                    rs ==(message.content.lower())
+            elif rs == ("good morning"):
+                    response = ("Good Morning Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
                     embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
@@ -58,8 +63,9 @@ class Reply(commands.Cog):
                     embed.set_footer(text=f"{guild.name}", icon_url=guild.icon_url)
                     await message.channel.send(embed=embed)
                     return
-            elif message.content == ("Gn"):
-                    response = ("Goodnigth Buddy..!")
+                    rs ==(message.content.lower())
+            elif rs == ("Good nigth"):
+                    response = ("Good Nigth Buddy..!")
                     c_r = str(f"""```css\n{response}```""")
                     embed = discord.Embed(color=gold, timestamp=msg.created_at)
                     embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
