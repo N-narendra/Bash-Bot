@@ -73,7 +73,6 @@ async def on_message(msg):
             pass
 
         await client.process_commands(msg)  
-
-#client.run("NzkwNDgwODk1MTI3MTkxNTUz.X-BOsw.50pGDsZ4m48yY7Whl2vhAd4wyLM")  
-client.run("Nzg5NTA0OTg0NzUyMDYyNDg2.X9zB0A.nORPkFLfgmVz22C47lcU5Fl8LDc") 
+ 
+client.run("TOKEN") 
 
