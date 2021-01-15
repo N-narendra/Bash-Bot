@@ -1,3 +1,3 @@
 # Bash-Bot
-bash bot for discord
-A simple bot was written in python.
+Bash bot for discord.
+A simple bot is written in python.
